@@ -16,8 +16,16 @@ Each `releases/<release-id>/` directory contains:
 
 The publish workflow is manual. It validates the manifest and every tarball
 before invoking `npm publish --provenance`. `NPM_TOKEN` must be configured as a
-repository secret and must be an npm automation or granular token authorized
-for the `@oa-sdk` scope.
+repository or `npm-publish` environment secret. It must be a granular npm
+token owned by, or granted publish access from, `astralclover`, authorized for
+the `@oa-sdk` scope with write permission and 2FA bypass enabled. The workflow
+checks the npm identity before it attempts a publish.
+
+For the long-term tokenless option, configure each package's npm trusted
+publisher as GitHub Actions: owner `mineclover`, repository
+`oa-sdk-releases`, workflow `publish.yml`, environment `npm-publish`, allowed
+action `npm publish`. The workflow already has the OIDC permission required
+for that configuration.
 
 ## Promotion flow
 

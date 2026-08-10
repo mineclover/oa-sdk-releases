@@ -10,6 +10,8 @@ if (!process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
   throw new Error('NPM_TOKEN or NODE_AUTH_TOKEN must be configured as a repository or environment secret')
 }
 execFileSync(process.execPath, [resolve(root, 'scripts/validate-release.mjs'), '--release', releaseId], { stdio: 'inherit' })
+const publisher = npmWhoami()
+console.log(`npm publish identity: ${publisher}`)
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
 for (const entry of manifest.packages) {
@@ -32,6 +34,17 @@ function npmView(name, version) {
     return output ? JSON.parse(output) : undefined
   } catch {
     return undefined
+  }
+}
+
+function npmWhoami() {
+  try {
+    return execFileSync('npm', ['whoami'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim()
+  } catch {
+    throw new Error('npm authentication preflight failed; configure a valid @oa-sdk publish token as NPM_TOKEN')
   }
 }
 
