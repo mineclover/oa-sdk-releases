@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-08-10-v0.5.0",
+  "sourceRevision": "f4db7b36469470f6533e81c3f5233d230ee72801",
+  "packages": [
+    {
+      "name": "@oa-sdk/core",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-core-0.1.2.tgz",
+      "integrity": "sha512-lvB4dwAhSVJnmYBFfRCR9JofNkRnCRUkPI6hqDaGbYWpp9hw1NaFS2HNLtbtmvzyjTCn+raUGHG1+0lKQFj3NQ=="
+    },
+    {
+      "name": "@oa-sdk/openapi-projection-contract",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-openapi-projection-contract-0.1.2.tgz",
+      "integrity": "sha512-wnCCKakp19VtBB9eXaWmktm80cAlGcz512Pwoyx/9V26XXQ1L5ywdgxhhaDAWH93lOCwbKa8fu9dSn+PQ1IMFw=="
+    },
+    {
+      "name": "@oa-sdk/typespec-decorators",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-typespec-decorators-0.1.2.tgz",
+      "integrity": "sha512-CDZGto8m7qI18pMlCs7bSZRB9DBkRzv99Vc/Gp6t4X9HiVZoJPj/iw+tC+fSP4vRlgUULOQqYscwh20T4wiihA=="
+    },
+    {
+      "name": "@oa-sdk/parser",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-parser-0.1.2.tgz",
+      "integrity": "sha512-3SmT4k7jFPOMJHid9Q5fYsoH0nOqPeFIsqblXOFZC/zRi4nQtjmu7rm9hF/cxG9SGlQD18LGIGuVetVCmd2ocg=="
+    },
+    {
+      "name": "@oa-sdk/codegen",
+      "version": "0.5.0",
+      "tarball": "packages/oa-sdk-codegen-0.5.0.tgz",
+      "integrity": "sha512-dgWBi2oGte5KsKcPsmCIX0AWUAuNRXRZSNlAcnKWt7jtbDbbhruNALAOD4Vl1wdvSDbVaNyWCQvbIP4p8zjZmA=="
+    }
+  ]
+}
