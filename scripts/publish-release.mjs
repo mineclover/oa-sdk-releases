@@ -6,7 +6,9 @@ const root = resolve(import.meta.dirname, '..')
 const releaseId = readReleaseId(process.argv.slice(2))
 const manifestPath = resolve(root, 'releases', releaseId, 'manifest.json')
 
-if (!process.env.NPM_TOKEN) throw new Error('NPM_TOKEN must be configured as a repository secret')
+if (!process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
+  throw new Error('NPM_TOKEN or NODE_AUTH_TOKEN must be configured as a repository or environment secret')
+}
 execFileSync(process.execPath, [resolve(root, 'scripts/validate-release.mjs'), '--release', releaseId], { stdio: 'inherit' })
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
