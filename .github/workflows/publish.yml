@@ -1,0 +1,42 @@
+name: Publish npm release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: Immutable release directory under releases/
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-release-${{ inputs.release_id }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Validate and publish ${{ inputs.release_id }}
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Validate release artifact boundary
+        run: node scripts/validate-release.mjs --release "$RELEASE_ID"
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+
+      - name: Publish validated release
+        run: node scripts/publish-release.mjs --release "$RELEASE_ID"
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

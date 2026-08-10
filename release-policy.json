@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/mineclover/oa-sdk-releases.git",
+  "distributionCandidates": [
+    "@oa-sdk/core",
+    "@oa-sdk/openapi-projection-contract",
+    "@oa-sdk/typespec-decorators",
+    "@oa-sdk/parser",
+    "@oa-sdk/codegen"
+  ],
+  "allowedPackagePaths": [
+    "package/package.json",
+    "package/README.md",
+    "package/LICENSE",
+    "package/dist/",
+    "package/lib/"
+  ]
+}
