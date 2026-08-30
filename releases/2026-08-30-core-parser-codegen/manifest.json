@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-08-30-core-parser-codegen",
+  "sourceRevision": "db2d51954f5b3e9b922cf8916e685cfdd02a7c5e",
+  "packages": [
+    {
+      "name": "@oa-sdk/core",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-core-0.2.0.tgz",
+      "integrity": "sha512-046+V2lTU+s8mQgSvximiV3XvNPTCbEk7rNoF4C6r6ztjKrkUh0lvfLjzeK8oeQJiBDK/BC/kzG26LxFD9aM9Q=="
+    },
+    {
+      "name": "@oa-sdk/parser",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-parser-0.2.0.tgz",
+      "integrity": "sha512-gPE3XWQLNMVx9rbH9BUgoUQWQR1cJ0DhX3CVl3s5Hioo9dw4e8ai3LiQY5RN3CsVU43EdwXCyEsZGcb+4aH4YQ=="
+    },
+    {
+      "name": "@oa-sdk/codegen",
+      "version": "0.6.0",
+      "tarball": "packages/oa-sdk-codegen-0.6.0.tgz",
+      "integrity": "sha512-vJAXSqG0XO7Njj8/GbUZFPkoNOliYpA1BZr5wdrWb3JQAwh7IQIe/nQFsfNMCcaEMBwTiX56DAxNtgsZI+taFw=="
+    }
+  ]
+}
