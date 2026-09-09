@@ -6,7 +6,8 @@
     "@oa-sdk/openapi-projection-contract",
     "@oa-sdk/typespec-decorators",
     "@oa-sdk/parser",
-    "@oa-sdk/codegen"
+    "@oa-sdk/codegen",
+    "@oa-sdk/ast-sync"
   ],
   "allowedPackagePaths": [
     "package/package.json",

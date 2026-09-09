@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-09-09-ast-sync-v0.1.0",
+  "sourceRevision": "d97faea02015c5a2cf30f20e7f0f2e127ed79f2e",
+  "packages": [
+    {
+      "name": "@oa-sdk/ast-sync",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-ast-sync-0.1.0.tgz",
+      "integrity": "sha512-n15oSDyeixGCg57JsEkUzhYioD1Ozxi5ANMv+nargNNnxgBRLJky947Xx0vK3YAAdUq0J3iV1WzQ1k1S5ZSQzg=="
+    }
+  ]
+}
