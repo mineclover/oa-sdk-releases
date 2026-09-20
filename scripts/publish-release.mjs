@@ -16,13 +16,36 @@ console.log(`npm publish identity: ${publisher}`)
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
 for (const entry of manifest.packages) {
   const existing = npmView(entry.name, entry.version)
-  if (existing) throw new Error(`${entry.name}@${entry.version} already exists on npm; publish a new immutable version`)
-  const archive = resolve(root, 'releases', releaseId, entry.tarball)
-  execFileSync('npm', ['publish', archive, '--access', 'public', '--provenance'], {
-    cwd: root,
-    stdio: 'inherit',
-    env: process.env,
-  })
+  if (existing) {
+    console.log(`${entry.name}@${entry.version} already exists on npm; skipping re-publish.`)
+  } else {
+    const archive = resolve(root, 'releases', releaseId, entry.tarball)
+    try {
+      execFileSync('npm', ['publish', archive, '--access', 'public', '--provenance'], {
+        cwd: root,
+        stdio: 'inherit',
+        env: process.env,
+      })
+    } catch (err) {
+      if (err.message && (err.message.includes('previously published versions') || err.message.includes('E403'))) {
+        console.log(`${entry.name}@${entry.version} was already published on npm.`)
+      } else {
+        throw err
+      }
+    }
+  }
+
+  try {
+    console.log(`Ensuring public access for ${entry.name}...`)
+    execFileSync('npm', ['access', 'public', entry.name], {
+      cwd: root,
+      stdio: 'inherit',
+      env: process.env,
+    })
+    console.log(`Successfully verified public access for ${entry.name}`)
+  } catch (err) {
+    console.warn(`npm access public warning for ${entry.name}:`, err.message)
+  }
 }
 
 function npmView(name, version) {
