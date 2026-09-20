@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-09-20-codegen-v0.8.1-tools-v0.1.0",
+  "sourceRevision": "3fecfd1f41dfe5f0a3e83544ef60c54d46b57834",
+  "packages": [
+    {
+      "name": "@oa-sdk/codegen",
+      "version": "0.8.1",
+      "tarball": "packages/oa-sdk-codegen-0.8.1.tgz",
+      "integrity": "sha512-Rt0DSqYimvpka7lgjwXm3rEia3xomMFVDxRr4gSxScVWZv0HpayZ0QTm3eLCAfXtbOT3eRaMk4SCfHL8Bim9cw=="
+    },
+    {
+      "name": "@oa-sdk/ast-sync",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-ast-sync-0.2.0.tgz",
+      "integrity": "sha512-AVDSOsuTb0iuQS4/4VbdW9GF8d55uzo47KpG+xQL2Mw20ibisZDjUHqkNOMxXn1Z5ORlVxhWHcwahhRhAQOQ8g=="
+    },
+    {
+      "name": "@oa-sdk/tools",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-tools-0.1.0.tgz",
+      "integrity": "sha512-ojuY3YB5Rfqx8dJnnDpCOFnZk6LrKkAZdCTimqRRp9NpnOvMuTzSnPrFLeRx+1WsAS2fr0V9QtIzPIzf4KekAw=="
+    }
+  ]
+}
