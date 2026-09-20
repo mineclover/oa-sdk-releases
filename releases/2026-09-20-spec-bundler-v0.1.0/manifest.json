@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-09-20-spec-bundler-v0.1.0",
+  "sourceRevision": "1eedb210fcee479e06163f12210631a63ed71e69",
+  "packages": [
+    {
+      "name": "@oa-sdk/spec-bundler",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-spec-bundler-0.1.0.tgz",
+      "integrity": "sha512-7jW4N2tYgeyH2EvbuVsZIV1LbnuEUEWKKFqTaacPgSMEFGi9wjK9hP2zB8+Xnn+MfJxBjRDF/ofO2cxYzC3mLQ=="
+    }
+  ]
+}

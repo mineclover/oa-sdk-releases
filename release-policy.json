@@ -8,7 +8,8 @@
     "@oa-sdk/parser",
     "@oa-sdk/codegen",
     "@oa-sdk/ast-sync",
-    "@oa-sdk/tools"
+    "@oa-sdk/tools",
+    "@oa-sdk/spec-bundler"
   ],
   "allowedPackagePaths": [
     "package/package.json",
