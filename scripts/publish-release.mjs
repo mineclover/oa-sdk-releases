@@ -37,14 +37,14 @@ for (const entry of manifest.packages) {
 
   try {
     console.log(`Ensuring public access for ${entry.name}...`)
-    execFileSync('npm', ['access', 'public', entry.name], {
+    execFileSync('npm', ['access', 'set', 'status=public', entry.name], {
       cwd: root,
       stdio: 'inherit',
       env: process.env,
     })
     console.log(`Successfully verified public access for ${entry.name}`)
   } catch (err) {
-    console.warn(`npm access public warning for ${entry.name}:`, err.message)
+    console.warn(`npm access set status=public warning for ${entry.name}:`, err.message)
   }
 }
 
