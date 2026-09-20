@@ -7,7 +7,8 @@
     "@oa-sdk/typespec-decorators",
     "@oa-sdk/parser",
     "@oa-sdk/codegen",
-    "@oa-sdk/ast-sync"
+    "@oa-sdk/ast-sync",
+    "@oa-sdk/tools"
   ],
   "allowedPackagePaths": [
     "package/package.json",
