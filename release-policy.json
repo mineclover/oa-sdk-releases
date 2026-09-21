@@ -9,7 +9,12 @@
     "@oa-sdk/codegen",
     "@oa-sdk/ast-sync",
     "@oa-sdk/tools",
-    "@oa-sdk/spec-bundler"
+    "@oa-sdk/spec-bundler",
+    "@oa-sdk/chunk-stream",
+    "@oa-sdk/chunk-stream-crdt",
+    "@oa-sdk/chunk-stream-ui",
+    "@oa-sdk/chunk-stream-timeseries",
+    "@oa-sdk/chunk-stream-react"
   ],
   "allowedPackagePaths": [
     "package/package.json",

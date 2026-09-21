@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-09-22-chunk-stream-v0.1.0",
+  "sourceRevision": "80b5393d5ddb0fd8a649196f34c6bd6233d1c84c",
+  "packages": [
+    {
+      "name": "@oa-sdk/tools",
+      "version": "0.1.1",
+      "tarball": "packages/oa-sdk-tools-0.1.1.tgz",
+      "integrity": "sha512-3pc5dtu66mJGzk6sVNyMd5Q6kMFKNbG5o+IwP8wjhL9kxDzKypqvTS3NbRoHG2fFoSRBwzaJNvwRAI+gGcP5Tg=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-chunk-stream-0.1.0.tgz",
+      "integrity": "sha512-60mi1GPVP1YtqE/KHSHEvdrAWY3dH+7KpuWb5en8/vslaOr8OH8roqFz7x/KXLC7e5i5Ul5XhBgQ5qilW8iv9g=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-crdt",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-chunk-stream-crdt-0.1.0.tgz",
+      "integrity": "sha512-9nbbhKFQhicwJSau/NhoT6fyHJkr+hheQCOWr72TMNPsA1yx3pw7i/lCuJ4AkUAXiZWIGMD5iSWoOVk1xzNwSg=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-ui",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-chunk-stream-ui-0.1.0.tgz",
+      "integrity": "sha512-GNX/pVGRCTFQ0GH8lCsmWyWnAJWBtqfQtRQGZYQo8XMeMS5dv45dBfNarBppke3hs1gqv0CLQGIkWzHnwIBHGw=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-timeseries",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-chunk-stream-timeseries-0.1.0.tgz",
+      "integrity": "sha512-czbqvtD2eKZsqTBaQUMjOniQgdD/G+K18fbZB30A/bsolARtWLrMEBN6OIV5GkPNk6FqxJJgPb67fsdEsGyW9g=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-react",
+      "version": "0.1.0",
+      "tarball": "packages/oa-sdk-chunk-stream-react-0.1.0.tgz",
+      "integrity": "sha512-W2X4OSt8QxDzr5nYJlh9wEsrxpw6I+PSqKZhA0EJE975Xjw4KjtvVz39ox2WKlC+aKHvA0UNoM7TRdq6t110gQ=="
+    }
+  ]
+}
