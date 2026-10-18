@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-10-18-chunk-stream-v0.2.0",
+  "sourceRevision": "23afe831a915448becc20a123e4ee771544fdac5",
+  "packages": [
+    {
+      "name": "@oa-sdk/chunk-stream",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-chunk-stream-0.2.0.tgz",
+      "integrity": "sha512-0cMUpgBSgxR5NrwDQx1u83kNSnETHZosjp3tbwNC0BL2613+kh5E/OnQqmoiOtJUR5JfiafKqCVuu4wJtPMiOg=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-crdt",
+      "version": "0.1.1",
+      "tarball": "packages/oa-sdk-chunk-stream-crdt-0.1.1.tgz",
+      "integrity": "sha512-Jg6PjsikwKmSjBHvc9XODOCVEL3nZyocgCgBpV/4pyF7vW96xrMY5dDS4ncygjhTfFDcH5W6fQvxZb7Y6LUhSA=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-ui",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-chunk-stream-ui-0.2.0.tgz",
+      "integrity": "sha512-TFSERw1wfxt5vkA6FaF1bIbejG19LNEyP+0A66nlqMiEc8KMzAtd0ClY2b4cNUn4epItXWENkGSzQIIpvhYAPA=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-timeseries",
+      "version": "0.1.1",
+      "tarball": "packages/oa-sdk-chunk-stream-timeseries-0.1.1.tgz",
+      "integrity": "sha512-tdKKC8AC3QkAa8GclzGuFK0p/gqoZ3EtVGucdHOXuOI78F5ch5tiycSeC1VyTBBlAO4F63+w9zzx1ONUOmCIUg=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-react",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-chunk-stream-react-0.2.0.tgz",
+      "integrity": "sha512-36teyyu2/rw+aV2TrqHB5izHZRhP/Ie5QqNZDLVOY7ViGapOhbh2zFeKoL8W2z2HaSPjDKomah7L7qecDvUdFA=="
+    }
+  ]
+}
