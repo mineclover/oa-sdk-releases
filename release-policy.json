@@ -9,12 +9,21 @@
     "@oa-sdk/codegen",
     "@oa-sdk/ast-sync",
     "@oa-sdk/tools",
-    "@oa-sdk/spec-bundler",
+    "@oa-sdk/surface-ir",
     "@oa-sdk/chunk-stream",
     "@oa-sdk/chunk-stream-crdt",
     "@oa-sdk/chunk-stream-ui",
     "@oa-sdk/chunk-stream-timeseries",
-    "@oa-sdk/chunk-stream-react"
+    "@oa-sdk/chunk-stream-react",
+    "@oa-sdk/peer-transport",
+    "@oa-sdk/peer-server",
+    "@oa-sdk/webmcp-peer",
+    "@oa-sdk/collab-workspace",
+    "@oa-sdk/mcp-mesh",
+    "@oa-sdk/router",
+    "@oa-sdk/client",
+    "@oa-sdk/mock-server",
+    "@oa-sdk/telemetry"
   ],
   "allowedPackagePaths": [
     "package/package.json",
