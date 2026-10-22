@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const root = resolve(import.meta.dirname, '..')
@@ -9,7 +9,7 @@ const manifestPath = resolve(root, 'releases', releaseId, 'manifest.json')
 if (!process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
   throw new Error('NPM_TOKEN or NODE_AUTH_TOKEN must be configured as a repository or environment secret')
 }
-execFileSync(process.execPath, [resolve(root, 'scripts/validate-release.mjs'), '--release', releaseId], { stdio: 'inherit' })
+execFileSync(process.execPath, [resolve(root, 'scripts', 'validate-release.mjs'), '--release', releaseId], { stdio: 'inherit' })
 const publisher = npmWhoami()
 console.log(`npm publish identity: ${publisher}`)
 
@@ -27,7 +27,9 @@ for (const entry of manifest.packages) {
         env: process.env,
       })
     } catch (err) {
-      if (err.message && (err.message.includes('previously published versions') || err.message.includes('E403'))) {
+      // A repeat publish of the exact version is the only safe "already done" case. Permission and
+      // validation failures must stop the release; the 0.2.0 run used to hide them as success.
+      if (err.message && err.message.includes('previously published versions')) {
         console.log(`${entry.name}@${entry.version} was already published on npm.`)
       } else {
         throw err
@@ -35,25 +37,30 @@ for (const entry of manifest.packages) {
     }
   }
 
-  try {
-    console.log(`Ensuring public access for ${entry.name}...`)
-    execFileSync('npm', ['access', 'set', 'status=public', entry.name], {
-      cwd: root,
-      stdio: 'inherit',
-      env: process.env,
-    })
-    console.log(`Successfully verified public access for ${entry.name}`)
-  } catch (err) {
-    console.warn(`npm access set status=public warning for ${entry.name}:`, err.message)
+  // npm can answer from a stale cache or CDN edge right after publish. Verify the exact version is
+  // resolvable from the public registry, retrying long enough for propagation.
+  await verifyPublished(entry.name, entry.version)
+  console.log(`Verified ${entry.name}@${entry.version} on the public registry.`)
+}
+
+async function verifyPublished(name, version) {
+  const deadline = Date.now() + 5 * 60_000
+  let last
+  while (Date.now() < deadline) {
+    last = npmView(name, version)
+    if (last === version) return
+    await new Promise(resolve => setTimeout(resolve, 5_000))
   }
+  throw new Error(`${name}@${version} is not resolvable from the public npm registry after 5 minutes`)
 }
 
 function npmView(name, version) {
   try {
-    const output = execFileSync('npm', ['view', `${name}@${version}`, 'version', '--json'], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-    }).trim()
+    const output = execFileSync(
+      'npm',
+      ['view', `${name}@${version}`, 'version', '--json', '--prefer-online', '--registry', 'https://registry.npmjs.org'],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] },
+    ).trim()
     return output ? JSON.parse(output) : undefined
   } catch {
     return undefined
