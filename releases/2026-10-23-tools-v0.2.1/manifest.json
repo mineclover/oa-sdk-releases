@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-10-23-tools-v0.2.1",
+  "sourceRevision": "3d6d5d5ed9c7881ef1ec7487572d473af1a90a24",
+  "packages": [
+    {
+      "name": "@oa-sdk/tools",
+      "version": "0.2.1",
+      "tarball": "packages/oa-sdk-tools-0.2.1.tgz",
+      "integrity": "sha512-Pk1MmA7BDkgOLOJAW9NSiSdyVXi67BBp3TFSKchBOfyA2sMeaY7G8X+NuFDT4woUlqMskcSrGv98rVHR7o74QA=="
+    },
+    {
+      "name": "@oa-sdk/mcp-mesh",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-mcp-mesh-0.1.2.tgz",
+      "integrity": "sha512-xS0FCN6KUFPZ3bvlFvTVzLIbuplnOhW4VQtylBoeVZG666mWw6LO9VZS8wZkVmrDVafsxUmhoh+JMJgk9+0Trw=="
+    }
+  ]
+}
