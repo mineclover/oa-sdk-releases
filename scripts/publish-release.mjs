@@ -11,7 +11,8 @@ if (!process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
 }
 execFileSync(process.execPath, [resolve(root, 'scripts', 'validate-release.mjs'), '--release', releaseId], { stdio: 'inherit' })
 const publisher = npmWhoami()
-console.log(`npm publish identity: ${publisher}`)
+if (publisher) console.log(`npm publish identity: ${publisher}`)
+else console.log('npm whoami is unavailable for this token; continuing with the publish attempt')
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
 for (const entry of manifest.packages) {
@@ -69,12 +70,18 @@ function npmView(name, version) {
 
 function npmWhoami() {
   try {
-    return execFileSync('npm', ['whoami'], {
+    return execFileSync('npm', ['whoami', '--registry', 'https://registry.npmjs.org'], {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
     }).trim()
-  } catch {
-    throw new Error('npm authentication preflight failed; configure a valid @oa-sdk publish token as NPM_TOKEN')
+  } catch (err) {
+    // Granular tokens can be scoped so that whoami is denied while package publish is allowed.
+    // Do not turn that into a release failure before the real publish attempt reports its error.
+    const details = [err?.stdout, err?.stderr, err?.message]
+      .filter(value => typeof value === 'string' && value.trim().length > 0)
+      .join('\n')
+    console.log(`npm whoami failed: ${details || String(err)}`)
+    return undefined
   }
 }
 
