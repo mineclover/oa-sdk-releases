@@ -1,0 +1,51 @@
+name: Configure npm trusted publishing
+
+# One-time (or per-new-package) bootstrap for npm trusted publishing. It uses the existing
+# npm-publish environment secret to create the GitHub Actions trust relationship; publish.yml then
+# supports trusted_publishing=true and can run without NPM_TOKEN once the relationship exists.
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: Space-separated package names to configure
+        required: true
+        default: "@oa-sdk/tools @oa-sdk/mcp-mesh"
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  configure:
+    name: Configure trusted publishers
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Create GitHub Actions trust relationships
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PACKAGES: ${{ inputs.packages }}
+        run: |
+          set -euo pipefail
+          read -ra package_list <<< "$PACKAGES"
+          for package in "${package_list[@]}"; do
+            echo "::group::Configure $package"
+            npm trust github "$package" \
+              --file publish.yml \
+              --repo mineclover/oa-sdk-releases \
+              --environment npm-publish \
+              --allow-publish \
+              -y
+            npm trust list "$package"
+            echo "::endgroup::"
+          done
