@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-10-22-webmcp-peer-v0.2.1",
+  "sourceRevision": "f27ca51fc0660374976b20a6c309f8dda9e138f9",
+  "packages": [
+    {
+      "name": "@oa-sdk/webmcp-peer",
+      "version": "0.2.1",
+      "tarball": "packages/oa-sdk-webmcp-peer-0.2.1.tgz",
+      "integrity": "sha512-mjB8ymyT3igZod4pxWImuBSQNSCmAZ/BNLafm1Gr6cvkYga/b5EasksBMln1iaw8b2LV5S/ickuL7wWcH3XEWw=="
+    }
+  ]
+}
