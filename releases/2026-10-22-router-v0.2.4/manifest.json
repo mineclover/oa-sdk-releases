@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-10-22-router-v0.2.4",
+  "sourceRevision": "7de51c041a81c6a62766a4dd7801cecaf87951e5",
+  "packages": [
+    {
+      "name": "@oa-sdk/router",
+      "version": "0.2.4",
+      "tarball": "packages/oa-sdk-router-0.2.4.tgz",
+      "integrity": "sha512-+jCQXbsb/N2d2LDIizzsQsYxB5glvWL1zUGzPI54t1IvbBC9hbuV3XKHY1N1q6ebUIShwTApwkRgJHQUi/RzHw=="
+    }
+  ]
+}
