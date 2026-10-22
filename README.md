@@ -21,11 +21,42 @@ token owned by, or granted publish access from, `astralclover`, authorized for
 the `@oa-sdk` scope with write permission and 2FA bypass enabled. The workflow
 checks the npm identity before it attempts a publish.
 
+### Trusted publishing setup (manual, 2FA required)
+
 For the long-term tokenless option, configure each package's npm trusted
 publisher as GitHub Actions: owner `mineclover`, repository
 `oa-sdk-releases`, workflow `publish.yml`, environment `npm-publish`, allowed
-action `npm publish`. The workflow already has the OIDC permission required
-for that configuration.
+action `npm publish`.
+
+This setup **cannot be automated with the existing `NPM_TOKEN`**. npm rejects
+trusted-publishing management from granular tokens that bypass 2FA:
+
+```text
+E403 Granular access tokens that bypass two-factor authentication may not perform this action
+```
+
+A person with npm account access must configure it once, using the npm website
+or an interactive login that can complete 2FA:
+
+```bash
+npm login --auth-type=web
+npm trust github @oa-sdk/tools \
+  --file publish.yml \
+  --repo mineclover/oa-sdk-releases \
+  --environment npm-publish \
+  --allow-publish -y
+npm trust github @oa-sdk/mcp-mesh \
+  --file publish.yml \
+  --repo mineclover/oa-sdk-releases \
+  --environment npm-publish \
+  --allow-publish -y
+npm trust list @oa-sdk/tools
+npm trust list @oa-sdk/mcp-mesh
+```
+
+After both trust relationships exist, run **Publish npm release** with
+`trusted_publishing=true`. The workflow already has the OIDC permission required
+for that configuration and removes `NPM_TOKEN` from the publish environment.
 
 ## Promotion flow
 
