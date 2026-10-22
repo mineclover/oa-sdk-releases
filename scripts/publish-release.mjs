@@ -3,16 +3,22 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const root = resolve(import.meta.dirname, '..')
-const releaseId = readReleaseId(process.argv.slice(2))
+const args = process.argv.slice(2)
+const releaseId = readReleaseId(args)
+const trustedPublishing = args.includes('--trusted')
 const manifestPath = resolve(root, 'releases', releaseId, 'manifest.json')
 
-if (!process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
+if (!trustedPublishing && !process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
   throw new Error('NPM_TOKEN or NODE_AUTH_TOKEN must be configured as a repository or environment secret')
 }
 execFileSync(process.execPath, [resolve(root, 'scripts', 'validate-release.mjs'), '--release', releaseId], { stdio: 'inherit' })
-const publisher = npmWhoami()
-if (publisher) console.log(`npm publish identity: ${publisher}`)
-else console.log('npm whoami is unavailable for this token; continuing with the publish attempt')
+if (trustedPublishing) {
+  console.log('Publishing with npm trusted publishing (GitHub OIDC)')
+} else {
+  const publisher = npmWhoami()
+  if (publisher) console.log(`npm publish identity: ${publisher}`)
+  else console.log('npm whoami is unavailable for this token; continuing with the publish attempt')
+}
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
 for (const entry of manifest.packages) {
@@ -22,10 +28,15 @@ for (const entry of manifest.packages) {
   } else {
     const archive = resolve(root, 'releases', releaseId, entry.tarball)
     try {
+      const publishEnv = { ...process.env }
+      if (trustedPublishing) {
+        delete publishEnv.NPM_TOKEN
+        delete publishEnv.NODE_AUTH_TOKEN
+      }
       execFileSync('npm', ['publish', archive, '--access', 'public', '--provenance'], {
         cwd: root,
         stdio: 'inherit',
-        env: process.env,
+        env: publishEnv,
       })
     } catch (err) {
       // A repeat publish of the exact version is the only safe "already done" case. Permission and
