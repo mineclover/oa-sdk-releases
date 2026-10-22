@@ -39,6 +39,21 @@ Published package code is necessarily public through npm. This repository
 protects the private source history and unshipped development materials; it is
 not a secrecy boundary for executable package contents.
 
+
+## Credential recovery
+
+The publish workflow accepts two credential paths:
+
+- `NPM_TOKEN` (repository or `npm-publish` environment secret): a granular `@oa-sdk` write token
+  with 2FA bypass.
+- `trusted_publishing=true` on the manual run: npm exchanges the GitHub OIDC token. The package must
+  have a trusted publisher for owner `mineclover`, repository `oa-sdk-releases`, workflow
+  `publish.yml`, environment `npm-publish`.
+
+If a run fails before publishing any package version (401/404 authentication errors), the release
+ID is still unused; refresh the credential and re-run the same release ID. If some packages were
+published, create a new release with new versions instead.
+
 ## Security rules
 
 - Never add a package source directory or a `.tgz` that fails the workflow
