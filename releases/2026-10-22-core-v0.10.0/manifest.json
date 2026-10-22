@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-10-22-core-v0.10.0",
+  "sourceRevision": "bc7c6f8d9fc6e21ad7cfbc319e9330db96cb2676",
+  "packages": [
+    {
+      "name": "@oa-sdk/core",
+      "version": "0.3.1",
+      "tarball": "packages/oa-sdk-core-0.3.1.tgz",
+      "integrity": "sha512-GN+HzjzWvBzFrQYBI+WCaSHz9Y9wZFvCjA6qFP3zATBHqHfMKzOfzVPJpyWcURDVVXXbTE+7IQntwPCdkdoP6A=="
+    },
+    {
+      "name": "@oa-sdk/typespec-decorators",
+      "version": "0.4.0",
+      "tarball": "packages/oa-sdk-typespec-decorators-0.4.0.tgz",
+      "integrity": "sha512-3CSDbHsyNknaUppaRXdGuEa4syICxrBG6meW8ExVNT/r1E2kTxkSYgsu2ZSvvPWqpL+kD9WmrZj8mQNMQqViYA=="
+    },
+    {
+      "name": "@oa-sdk/parser",
+      "version": "0.5.0",
+      "tarball": "packages/oa-sdk-parser-0.5.0.tgz",
+      "integrity": "sha512-JPz/ofShrGPtWaJDr0fVmxsmf9+Xq+2jL2cTHOOMEIlwmSnkRXJeP+m95PqXKJYLqh5MgdH4826hYQqU1oyIKg=="
+    },
+    {
+      "name": "@oa-sdk/codegen",
+      "version": "0.10.0",
+      "tarball": "packages/oa-sdk-codegen-0.10.0.tgz",
+      "integrity": "sha512-vjaFtjKluJhzfSYaqky6N2GSlWce/SL5advuuuQ0t/2dKiMKjzNxAVqZwBcxGDa769rfp+8vgiq8MtfgA7QI0w=="
+    },
+    {
+      "name": "@oa-sdk/ast-sync",
+      "version": "0.2.1",
+      "tarball": "packages/oa-sdk-ast-sync-0.2.1.tgz",
+      "integrity": "sha512-HZtF6EZtmHpHkLS4af07l/+tPopEvweJl8fQr2Z8SpBSEznUcY/+DepkI6pA7ihD5D9Vc2Evzj/leY9JD/Lmig=="
+    },
+    {
+      "name": "@oa-sdk/tools",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-tools-0.2.0.tgz",
+      "integrity": "sha512-i6OtJE+gYnu4Up/l/zQw5ldZsWzJ9iMokDAy6l0bqur5bgaCNXIwyhHbBakXENUMwbJIENQ1Y/8bhrOd9FbLsA=="
+    },
+    {
+      "name": "@oa-sdk/surface-ir",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-surface-ir-0.2.0.tgz",
+      "integrity": "sha512-X2y4Q9x2TNO97qV4xcTU+mgKZsKMirfyv4YhkcEkGWzPOTW0mh8LjKAr0J75pDi6Lm8gEAafqtWY+znTTMttZA=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream",
+      "version": "0.3.0",
+      "tarball": "packages/oa-sdk-chunk-stream-0.3.0.tgz",
+      "integrity": "sha512-kX9qGNWpqcp9pjJ6OD+US9elofZqmlWua+QNiuMC/GKzMjz7424phx9LI01Ym9qJ2F2NGCeMWP+P1EyUva75OA=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-crdt",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-chunk-stream-crdt-0.1.2.tgz",
+      "integrity": "sha512-iKuyknhZJcwslSYc65Q//CTCgJeyjaxV1q3qGw89VMe6tlXXHmq5ZTWPCkxvzSLC21z9QlQuA3elo1DvD8Iz1g=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-ui",
+      "version": "0.2.1",
+      "tarball": "packages/oa-sdk-chunk-stream-ui-0.2.1.tgz",
+      "integrity": "sha512-N16vFcQjlZcDdpZPh+vBrDzp9iCzjcevArhC7mELZMZP+UTHFnm9XcWL9Gun3wlm9og3huK2VZO+5eXnO4xqTg=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-timeseries",
+      "version": "0.1.2",
+      "tarball": "packages/oa-sdk-chunk-stream-timeseries-0.1.2.tgz",
+      "integrity": "sha512-7eDiQQDC37J/WgWR20PHpq6Y7GoO0IHdEAEQNQi/2djJX+2FaeziOX4fbCip0VJSO2bikYOWfHCgIlLfV3RU7A=="
+    },
+    {
+      "name": "@oa-sdk/chunk-stream-react",
+      "version": "0.2.1",
+      "tarball": "packages/oa-sdk-chunk-stream-react-0.2.1.tgz",
+      "integrity": "sha512-MZA7DW6IB8y5EBZ3xwjClFahc8MXV9sn7pZ2cucP2ObX37+zlJaLWwjhmwhaf1wtM3F7k3PoEV357PVGLdJWkg=="
+    },
+    {
+      "name": "@oa-sdk/peer-transport",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-peer-transport-0.2.0.tgz",
+      "integrity": "sha512-hqV+Sp4Q5ntdsLWBoLVM0/sVRKMtD8sxzAkIXYv29mpE7KaYesODh3kxt+EfVqTHJHGY9S6uZ2/6k5SK+65yGg=="
+    },
+    {
+      "name": "@oa-sdk/peer-server",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-peer-server-0.2.0.tgz",
+      "integrity": "sha512-h6BW6VwTXtJAncS5eic3UWHJhJPHZGJBvlFQtznY+Y6zguBPYQR54K5NE+tFLw+byvbE4A2CylAXt8mpOcSSyw=="
+    },
+    {
+      "name": "@oa-sdk/webmcp-peer",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-webmcp-peer-0.2.0.tgz",
+      "integrity": "sha512-IDdhwtO5dXWwnTFYViOfnUjyohF7Xnx0lvWM5E/LzQDr04EcrH3Vm1iYpW6g5UftlYwG2GNZb3n3TLdbAjBurg=="
+    },
+    {
+      "name": "@oa-sdk/collab-workspace",
+      "version": "0.1.1",
+      "tarball": "packages/oa-sdk-collab-workspace-0.1.1.tgz",
+      "integrity": "sha512-oUaIHYyI5GBUTxVyyXHPwE/WFeAhGT8S4plW2H7JvnXIGhTjVzz0BLRXVZqY2g/bu1T/+trTpi+Joyhgoj1Hkw=="
+    },
+    {
+      "name": "@oa-sdk/mcp-mesh",
+      "version": "0.1.1",
+      "tarball": "packages/oa-sdk-mcp-mesh-0.1.1.tgz",
+      "integrity": "sha512-B9T0wsi1rNuUJPtiAVNJdXePz5bsh8/HaoKwwxK2qNYQrbTyKyWfYhjrsxkgtuPxRjwNkLHE6O0N5pa65i+0xg=="
+    },
+    {
+      "name": "@oa-sdk/router",
+      "version": "0.2.3",
+      "tarball": "packages/oa-sdk-router-0.2.3.tgz",
+      "integrity": "sha512-y9eBHWKf8DVKx+80SdAK+vAYdd400HR7GthaL/xdB4GZpouMyFzvFuLO2UOx3hq9PyJGl0z7Fr3pOolA4gSc/w=="
+    },
+    {
+      "name": "@oa-sdk/client",
+      "version": "0.3.0",
+      "tarball": "packages/oa-sdk-client-0.3.0.tgz",
+      "integrity": "sha512-8euNMaBsbhKony2HBnaG0u31wMmR1SHUBZzA+VvgCCSIJlD0qX4F6aK/dbCXJmgU2d/QVT1BxASy23xNj+sKBw=="
+    },
+    {
+      "name": "@oa-sdk/mock-server",
+      "version": "0.1.5",
+      "tarball": "packages/oa-sdk-mock-server-0.1.5.tgz",
+      "integrity": "sha512-wsdDnhh8KOIOP/tmm7aYTcCitZa/9izk6XZcNGt7njnHmJ6M3DXw4Ct5CPsyT7H8p2PlqfQ7oMzGs3m7kj9LlQ=="
+    },
+    {
+      "name": "@oa-sdk/telemetry",
+      "version": "0.2.0",
+      "tarball": "packages/oa-sdk-telemetry-0.2.0.tgz",
+      "integrity": "sha512-if1Owo+QXelj7gNGjDX9mn5VxLCCk6eKLVgh6VaCGmSLS1ZWLyEgfJ7Cs8yCCKiKVTZdxqA6bDXS2++x9Sl8PA=="
+    }
+  ]
+}
