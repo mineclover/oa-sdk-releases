@@ -54,9 +54,10 @@ npm trust list @oa-sdk/tools
 npm trust list @oa-sdk/mcp-mesh
 ```
 
-After both trust relationships exist, run **Publish npm release** with
-`trusted_publishing=true`. The workflow already has the OIDC permission required
-for that configuration and removes `NPM_TOKEN` from the publish environment.
+After both trust relationships exist, run **Publish npm release**. The
+`trusted_publishing` input now defaults to `true`: the workflow uses the OIDC
+identity and removes `NPM_TOKEN` from the publish environment. Set it to `false`
+only as a fallback while diagnosing a trust configuration.
 
 Both `npm trust list` and `npm trust github` require an interactive 2FA session.
 The CI `NPM_TOKEN` gets `E403` for reads as well as writes, so these commands
@@ -106,11 +107,11 @@ not a secrecy boundary for executable package contents.
 
 The publish workflow accepts two credential paths:
 
-- `NPM_TOKEN` (repository or `npm-publish` environment secret): a granular `@oa-sdk` write token
-  with 2FA bypass.
-- `trusted_publishing=true` on the manual run: npm exchanges the GitHub OIDC token. The package must
-  have a trusted publisher for owner `mineclover`, repository `oa-sdk-releases`, workflow
-  `publish.yml`, environment `npm-publish`.
+- `trusted_publishing=true` (default): npm exchanges the GitHub OIDC token. The package must have a
+  trusted publisher for owner `mineclover`, repository `oa-sdk-releases`, workflow `publish.yml`,
+  environment `npm-publish`.
+- `trusted_publishing=false` (fallback): uses `NPM_TOKEN`, a granular `@oa-sdk` write token with
+  2FA bypass. Use only while diagnosing a trust configuration.
 
 If a run fails before publishing any package version (401/404 authentication errors), the release
 ID is still unused; refresh the credential and re-run the same release ID. If some packages were

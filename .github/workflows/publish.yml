@@ -10,7 +10,7 @@ on:
       trusted_publishing:
         description: Use npm trusted publishing (GitHub OIDC) instead of NPM_TOKEN
         required: false
-        default: false
+        default: true
         type: boolean
 
 permissions:
