@@ -123,10 +123,10 @@ npm view @oa-sdk/<package> version --prefer-online
 npm view @oa-sdk/<package> dist-tags --json --prefer-online
 ```
 
-Create the GitHub Release/tag for the release ID. After the first successful
-OIDC publish, restrict token-based publishing access and retire `NPM_TOKEN`.
-If the token is left to expire instead of being revoked, no workflow change is
-needed: the workflow never receives it and OIDC releases are unaffected.
+Create the GitHub Release/tag for the release ID. Token-based publishing can be
+restricted after the first successful OIDC publish; this is optional hardening.
+If the old token is left to expire instead of being revoked, no workflow change
+is needed: the workflow never receives it and OIDC releases are unaffected.
 
 Published package code is necessarily public through npm. This repository
 protects the private source history and unshipped development materials; it is
