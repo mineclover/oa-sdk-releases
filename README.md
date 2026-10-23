@@ -59,6 +59,10 @@ After both trust relationships exist, run **Publish npm release**. The
 identity and removes `NPM_TOKEN` from the publish environment. Set it to `false`
 only as a fallback while diagnosing a trust configuration.
 
+Current configuration (2026-10-23): `@oa-sdk/tools` and `@oa-sdk/mcp-mesh` are
+configured for this workflow. The first OIDC publish validates the relationships;
+complete it within two days of creating or recreating a configuration.
+
 Both `npm trust list` and `npm trust github` require an interactive 2FA session.
 The CI `NPM_TOKEN` gets `E403` for reads as well as writes, so these commands
 cannot run from the publish workflow.
@@ -94,9 +98,35 @@ does not complete its first successful publish within two days.
 
 1. Private `oa-sdk` CI passes its release gates and creates a release export.
 2. The export is reviewed as a pull request in this repository.
-3. After merge, run **Publish npm release** with the release ID.
+3. After merge, run **Publish npm release** with the release ID. The
+   `trusted_publishing` input defaults to `true`, so the workflow uses GitHub
+   OIDC and does not pass `NPM_TOKEN` to the publish step.
 4. The workflow validates package boundaries, hashes, repository metadata, and
-   npm version availability, then publishes each tarball.
+   npm version availability, publishes each missing tarball, then verifies the
+   exact versions on the public registry.
+
+```bash
+gh workflow run "Publish npm release" \
+  --repo mineclover/oa-sdk-releases \
+  -f release_id=<release-id> \
+  -f trusted_publishing=true
+```
+
+Registry propagation can take several minutes. The workflow waits up to 15
+minutes (`PUBLISH_VERIFY_TIMEOUT_MS` overrides it). If verification fails after
+all packages were published, rerun the same release ID: already-published
+versions are skipped and only verification runs. Do not rebuild or replace the
+artifacts.
+
+After the workflow succeeds:
+
+```bash
+npm view @oa-sdk/<package> version --prefer-online
+npm view @oa-sdk/<package> dist-tags --json --prefer-online
+```
+
+Create the GitHub Release/tag for the release ID. After the first successful
+OIDC publish, restrict token-based publishing access and retire `NPM_TOKEN`.
 
 Published package code is necessarily public through npm. This repository
 protects the private source history and unshipped development materials; it is
@@ -121,8 +151,9 @@ published, create a new release with new versions instead.
 
 - Never add a package source directory or a `.tgz` that fails the workflow
   boundary validation.
-- Never use a release ID twice.
-- Do not rerun a release after any package version has been published. Create a
-  new release with new versions instead.
+- Never use a release ID twice for a different artifact set.
+- Do not republish or replace a tarball after its version is on npm. A rerun of
+  the same release ID is allowed only for registry verification; the publish
+  script skips versions that already exist.
 - `NPM_TOKEN` is used only by the GitHub Actions publish job and is never
   committed or used by an export script.
