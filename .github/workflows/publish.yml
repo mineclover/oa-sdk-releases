@@ -7,11 +7,6 @@ on:
         description: Immutable release directory under releases/
         required: true
         type: string
-      trusted_publishing:
-        description: Use npm trusted publishing (GitHub OIDC) instead of NPM_TOKEN
-        required: false
-        default: true
-        type: boolean
 
 permissions:
   contents: read
@@ -41,9 +36,9 @@ jobs:
         env:
           RELEASE_ID: ${{ inputs.release_id }}
 
+      # Trusted publishing only: npm exchanges the GitHub OIDC token. No long-lived
+      # NPM_TOKEN is passed to this step.
       - name: Publish validated release
-        run: node scripts/publish-release.mjs --release "$RELEASE_ID" ${{ inputs.trusted_publishing && '--trusted' || '' }}
+        run: node scripts/publish-release.mjs --release "$RELEASE_ID" --trusted
         env:
           RELEASE_ID: ${{ inputs.release_id }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
