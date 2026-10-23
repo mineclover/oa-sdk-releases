@@ -58,6 +58,33 @@ After both trust relationships exist, run **Publish npm release** with
 `trusted_publishing=true`. The workflow already has the OIDC permission required
 for that configuration and removes `NPM_TOKEN` from the publish environment.
 
+If `npm trust github` returns `E409 ... a trusted publisher configuration that a
+token could also match already exists`, the package already has a matching or
+overlapping configuration. List it before changing anything:
+
+```bash
+npm trust list @oa-sdk/tools
+npm trust list @oa-sdk/mcp-mesh
+```
+
+If an entry already names `mineclover/oa-sdk-releases`, `publish.yml`, and
+`npm-publish`, the setup is complete; no new entry is needed. If the entry is
+stale or names the wrong repository/workflow/environment, revoke it by its `id`
+and recreate it:
+
+```bash
+npm trust revoke @oa-sdk/tools --id=<trust-id>
+npm trust github @oa-sdk/tools \
+  --file publish.yml \
+  --repo mineclover/oa-sdk-releases \
+  --environment npm-publish \
+  --allow-publish -y
+```
+
+Existing trusted-publisher connections cannot be edited in place; deleting and
+recreating is the supported path. A newly created configuration expires if it
+does not complete its first successful publish within two days.
+
 ## Promotion flow
 
 1. Private `oa-sdk` CI passes its release gates and creates a release export.
