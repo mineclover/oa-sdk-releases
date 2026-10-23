@@ -58,6 +58,10 @@ After both trust relationships exist, run **Publish npm release** with
 `trusted_publishing=true`. The workflow already has the OIDC permission required
 for that configuration and removes `NPM_TOKEN` from the publish environment.
 
+Both `npm trust list` and `npm trust github` require an interactive 2FA session.
+The CI `NPM_TOKEN` gets `E403` for reads as well as writes, so these commands
+cannot run from the publish workflow.
+
 If `npm trust github` returns `E409 ... a trusted publisher configuration that a
 token could also match already exists`, the package already has a matching or
 overlapping configuration. List it before changing anything:
