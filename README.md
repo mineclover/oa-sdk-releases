@@ -15,11 +15,11 @@ Each `releases/<release-id>/` directory contains:
 - no `src/`, tests, source maps, lockfiles, or workspace configuration.
 
 The publish workflow is manual. It validates the manifest and every tarball
-before invoking `npm publish --provenance`. `NPM_TOKEN` must be configured as a
-repository or `npm-publish` environment secret. It must be a granular npm
-token owned by, or granted publish access from, `astralclover`, authorized for
-the `@oa-sdk` scope with write permission and 2FA bypass enabled. The workflow
-checks the npm identity before it attempts a publish.
+before invoking `npm publish --provenance`. The workflow uses **GitHub Actions
+OIDC trusted publishing only**: it exchanges the workflow's OIDC identity for a
+short-lived npm token and does not pass a long-lived `NPM_TOKEN` to the publish
+step. Each published package needs a trusted publisher for owner `mineclover`,
+repository `oa-sdk-releases`, workflow `publish.yml`, environment `npm-publish`.
 
 ### Trusted publishing setup (manual, 2FA required)
 
@@ -54,14 +54,14 @@ npm trust list @oa-sdk/tools
 npm trust list @oa-sdk/mcp-mesh
 ```
 
-After both trust relationships exist, run **Publish npm release**. The
-`trusted_publishing` input now defaults to `true`: the workflow uses the OIDC
-identity and removes `NPM_TOKEN` from the publish environment. Set it to `false`
-only as a fallback while diagnosing a trust configuration.
+After both trust relationships exist, run **Publish npm release**. The workflow
+always uses the OIDC identity; there is no token input or fallback in the
+workflow.
 
 Current configuration (2026-10-23): `@oa-sdk/tools` and `@oa-sdk/mcp-mesh` are
-configured for this workflow. The first OIDC publish validates the relationships;
-complete it within two days of creating or recreating a configuration.
+configured for this workflow and were validated by the
+`2026-10-23-tools-v0.2.2` publish. Complete the first OIDC publish within two
+days of creating or recreating a configuration.
 
 Both `npm trust list` and `npm trust github` require an interactive 2FA session.
 The CI `NPM_TOKEN` gets `E403` for reads as well as writes, so these commands
@@ -98,9 +98,8 @@ does not complete its first successful publish within two days.
 
 1. Private `oa-sdk` CI passes its release gates and creates a release export.
 2. The export is reviewed as a pull request in this repository.
-3. After merge, run **Publish npm release** with the release ID. The
-   `trusted_publishing` input defaults to `true`, so the workflow uses GitHub
-   OIDC and does not pass `NPM_TOKEN` to the publish step.
+3. After merge, run **Publish npm release** with the release ID. The workflow
+   always uses GitHub OIDC and does not pass `NPM_TOKEN` to the publish step.
 4. The workflow validates package boundaries, hashes, repository metadata, and
    npm version availability, publishes each missing tarball, then verifies the
    exact versions on the public registry.
@@ -108,8 +107,7 @@ does not complete its first successful publish within two days.
 ```bash
 gh workflow run "Publish npm release" \
   --repo mineclover/oa-sdk-releases \
-  -f release_id=<release-id> \
-  -f trusted_publishing=true
+  -f release_id=<release-id>
 ```
 
 Registry propagation can take several minutes. The workflow waits up to 15
@@ -135,17 +133,17 @@ not a secrecy boundary for executable package contents.
 
 ## Credential recovery
 
-The publish workflow accepts two credential paths:
+The publish workflow has one credential path: **GitHub OIDC trusted publishing**. It requires the
+package's trusted publisher for owner `mineclover`, repository `oa-sdk-releases`, workflow
+`publish.yml`, environment `npm-publish`. There is no token input in the workflow.
 
-- `trusted_publishing=true` (default): npm exchanges the GitHub OIDC token. The package must have a
-  trusted publisher for owner `mineclover`, repository `oa-sdk-releases`, workflow `publish.yml`,
-  environment `npm-publish`.
-- `trusted_publishing=false` (fallback): uses `NPM_TOKEN`, a granular `@oa-sdk` write token with
-  2FA bypass. Use only while diagnosing a trust configuration.
-
-If a run fails before publishing any package version (401/404 authentication errors), the release
-ID is still unused; refresh the credential and re-run the same release ID. If some packages were
+If a run fails with `ENEEDAUTH` before publishing any package version, check that the workflow
+filename, repository, environment, and `id-token: write` permission still match npm. The release ID
+is still unused, so fix the trust relationship and re-run the same release ID. If some packages were
 published, create a new release with new versions instead.
+
+`scripts/publish-release.mjs` still supports a local `NPM_TOKEN` run when `--trusted` is omitted.
+That is an emergency/manual path only; the GitHub Actions workflow always passes `--trusted`.
 
 ## Security rules
 
@@ -155,5 +153,5 @@ published, create a new release with new versions instead.
 - Do not republish or replace a tarball after its version is on npm. A rerun of
   the same release ID is allowed only for registry verification; the publish
   script skips versions that already exist.
-- `NPM_TOKEN` is used only by the GitHub Actions publish job and is never
-  committed or used by an export script.
+- The GitHub Actions publish job uses OIDC only and never receives a long-lived
+  `NPM_TOKEN`. Do not add one back to the workflow.
