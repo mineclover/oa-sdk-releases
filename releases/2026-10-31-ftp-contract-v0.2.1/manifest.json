@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-10-31-ftp-contract-v0.2.1",
+  "sourceRevision": "6d0ebc845fbde468f4fee4b06c30180507bf551c",
+  "packages": [
+    {
+      "name": "@oa-sdk/ftp-contract",
+      "version": "0.2.1",
+      "tarball": "packages/oa-sdk-ftp-contract-0.2.1.tgz",
+      "integrity": "sha512-hfQBaVnCz85NmzxgytKaISKq+F/TuyxcXABek4kJelLrohEWlBkhD8jovmhB3LDXaNYIDvdQtc4YqsKpVwMdkg=="
+    }
+  ]
+}
