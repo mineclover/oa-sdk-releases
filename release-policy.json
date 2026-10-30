@@ -23,7 +23,8 @@
     "@oa-sdk/router",
     "@oa-sdk/client",
     "@oa-sdk/mock-server",
-    "@oa-sdk/telemetry"
+    "@oa-sdk/telemetry",
+    "@oa-sdk/ftp-contract"
   ],
   "allowedPackagePaths": [
     "package/package.json",
