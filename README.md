@@ -1,15 +1,17 @@
 # OA SDK releases
 
 This public repository contains only reviewed, publishable OA SDK package
-artifacts. It deliberately does not contain the private `oa-sdk` source tree,
-tests, issue history, or development configuration.
+artifacts. The canonical [`oa-sdk`](https://github.com/mineclover/oa-sdk)
+source repository is public and remains the home for source, tests, issue
+history, and development configuration. This repository is the reviewed
+release-export boundary.
 
 ## Release boundary
 
 Each `releases/<release-id>/` directory contains:
 
 - a signed-off `manifest.json` with package name, version, tarball SHA-512, and
-  the private source revision identifier;
+  the canonical source revision identifier;
 - npm tarballs containing only `dist/`, approved `lib/` TypeSpec files,
   `package.json`, README, and LICENSE; and
 - no `src/`, tests, source maps, lockfiles, or workspace configuration.
@@ -96,7 +98,7 @@ does not complete its first successful publish within two days.
 
 ## Promotion flow
 
-1. Private `oa-sdk` CI passes its release gates and creates a release export.
+1. `oa-sdk` CI passes its release gates and creates a release export.
 2. The export is reviewed as a pull request in this repository.
 3. After merge, run **Publish npm release** with the release ID. The workflow
    always uses GitHub OIDC and does not pass `NPM_TOKEN` to the publish step.
@@ -128,9 +130,11 @@ restricted after the first successful OIDC publish; this is optional hardening.
 If the old token is left to expire instead of being revoked, no workflow change
 is needed: the workflow never receives it and OIDC releases are unaffected.
 
-Published package code is necessarily public through npm. This repository
-protects the private source history and unshipped development materials; it is
-not a secrecy boundary for executable package contents.
+Published package code is necessarily public through npm. The canonical
+`oa-sdk` source repository is public, while this repository records reviewed
+release exports and provenance and keeps unshipped development materials out
+of the artifact set. It is not a secrecy boundary for executable package
+contents.
 
 
 ## Credential recovery
