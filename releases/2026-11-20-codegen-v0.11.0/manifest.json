@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "2026-11-20-codegen-v0.11.0",
+  "sourceRevision": "3f2fe53c54c5a0ba6c90a06e4dbfd41425a8e095",
+  "packages": [
+    {
+      "name": "@oa-sdk/codegen",
+      "version": "0.11.0",
+      "tarball": "packages/oa-sdk-codegen-0.11.0.tgz",
+      "integrity": "sha512-peMzK0x87XSyhP23UiWbk8fpYM9/K5P3I1JHszuOQ/++WSqgE7/gMMN0wJIp7oSpgwhFHwNJ+5KShnKpcqZ/pg=="
+    },
+    {
+      "name": "@oa-sdk/ast-sync",
+      "version": "0.3.0",
+      "tarball": "packages/oa-sdk-ast-sync-0.3.0.tgz",
+      "integrity": "sha512-cot+xTnwxihrOMPXVt8nby3TgvxTa1zBdk4T63iXSu48Z4sSK5mBkf1AdgXUgdE8G5XVK930YC8gPdf0vRV4GQ=="
+    }
+  ]
+}
